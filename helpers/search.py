@@ -43,7 +43,7 @@ def searchmes(m):
         try:
             telegraph = Telegraph()
 
-            telegraph_res = telegraph.create_page(
+            telegraph_acc = telegraph.create_page(
                     short_name="VTube",
                     author_name='VTube Manager Bot',
                     author_url='https://t.me/VTube_Movies'
@@ -108,7 +108,7 @@ def searchmes(m):
                                         episode_name = episode["name"]
                                         episode_id = episode["id"]
                                         episode_num+=1
-                                        dir_down_url = "intent:https://{}/view/{}".format(APP_INTENT, LD_DOMAIN, episode_id)
+                                        dir_down_url = "intent:https://{}/view/{}".format(LD_DOMAIN, episode_id)
 
                                         episode_str = '''<p>
                                                         <b> - - - - - - - - - - - - Episode : </b><code>''' + str(episode_num) + '''</code><br>
@@ -138,7 +138,7 @@ def searchmes(m):
 
                             else:
                                 name = media["name"]
-                                dir_down = "intent:https://{}/view/{}".format(APP_INTENT, LD_DOMAIN, media["id"])
+                                dir_down = "intent:https://{}/view/{}".format(LD_DOMAIN, media["id"])
                                 f_season_html = "<b> - - - - - - - Direct Download Link : </b><a href={}>Play/Download In VTube App.</a> \nLogIn Required! !!<br>".format(dir_down)
 
                             TG_html = '''<p>
