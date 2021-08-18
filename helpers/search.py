@@ -136,7 +136,7 @@ def searchmes(m):
                             else:
                                 name = media["name"]
                                 dir_down = "https://{}/view/{}".format(LD_DOMAIN, media["id"])
-                                f_season_html = "<b> - - - - - - - Play/Download In VTube App : </b><a href={}>Click to Play/Download</a> \nLogIn Required! !!<br>" : </b><a href={}></a> !!<br>".format(dir_down)
+                                f_season_html = "<b> - - - - - - - Play/Download In VTube App : </b><a href={}>Click to Play/Download</a> \nLogIn Required! !!<br>".format(dir_down)
 
                             TG_html = '''<p>
                                             <img src=''' + str(backdrop) + '''>
