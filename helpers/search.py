@@ -135,8 +135,8 @@ def searchmes(m):
 
                             else:
                                 name = media["name"]
-                                dir_down = "https://{}/api/v1/redirectdownload/{}?a={}&id={}".format(LD_DOMAIN, name.replace(" ","%20"), search_acc_auth, media["id"])
-                                f_season_html = "<b> - - - - - - - Direct Download Link : </b><a href={}>Download From Here</a> jj !!<br>".format(dir_down)
+                                dir_down = "https://{}/view/{}".format(LD_DOMAIN, media["id"])
+                                f_season_html = "<b> - - - - - - - Play/Download In VTube App : </b><a href={}>Click to Play/Download</a> \nLogIn Required! !!<br>" : </b><a href={}></a> !!<br>".format(dir_down)
 
                             TG_html = '''<p>
                                             <img src=''' + str(backdrop) + '''>
