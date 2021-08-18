@@ -43,12 +43,6 @@ def getm3u8w(m):
             
             search_results = bot.send_message(m.chat.id, "`Searching Your LibDrive ...`\n\n`Query` : *{}*".format(query), parse_mode=telegram.ParseMode.MARKDOWN)
 
-            url_conf = "https://{}/api/v1/config?secret={}".format(LD_DOMW, SECRET)
-
-            r1 = requests.get(url_conf)
-            res1 = r1.json()
-            SEARCH_AUTH = res1["content"]["account_list"][0]["auth"]
-
             url_meta = "https://{}/api/v1/metadata?a={}&q={}".format(LD_DOMW, SEARCH_AUTH, query)
 
             r2 = requests.get(url_meta)
