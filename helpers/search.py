@@ -136,7 +136,7 @@ def searchmes(m):
                             else:
                                 name = media["name"]
                                 dir_down = "intent:https://{}/view/{}#Intent;package={};S.title=@Tube_Movirs {};end".format(LD_DOMAIN, media["id"], APP_INTENT, media["name"])
-                                f_season_html = "<b> - - - - - - - Play/Download In VTube App : </b><a href={}>Click to Play/Download</a> \n<b> - - - - - - - ⚠️Donated Members Only⚠️ </b><br>".format(dir_down)
+                                f_season_html = "<b> - - - - - - - Play/Download In VTube App : </b><a href={}></a> - - - - - - - ⚠️Donated Members Only⚠️ </b><br>".format(dir_down)
 
                             TG_html = '''<p>
                                             <img src=''' + str(backdrop) + '''>
