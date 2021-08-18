@@ -1,0 +1,75 @@
+{
+    "name": "MetaTool",
+    "description": "Coustamised MetaTool That Can do Magic From TeleGram",
+    "logo": "",
+    "keywords": [
+      "bot",
+      "telegram",
+      "python"
+    ],
+    "repository": "https://github.com/villain4u/MetaTool_TG_Bot",
+    "website": "https://github.com/villain4u/MetaTool_TG_Bot",
+    "success_url": "https://github.com/villain4u",
+    "env": {
+      
+      "BOT_TOKEN": {
+        "description": "The telegram bot token that you get from @BotFather.",
+        "required": true
+      },
+      "BOT_USERNAME": {
+        "description": "The Username of Bot.",
+        "required": true
+      },
+      "SECRET": {
+        "description": "Your Libdrive Settings SECRET.",
+        "required": true
+      },
+      "LD_DOMAIN": {
+        "description": "Your Libdrive Domain without https:// or http://",
+        "required": true
+      },
+      "ADMIN_IDS": {
+        "description": "The Telegram User ID of the Owner of the Bot. Get it by using /info in @MissRose_bot.",
+        "required": true
+      },
+      "GROUP_IDS": {
+        "description": "The Group IDs where The Bot will be Added.",
+        "required": false	
+      },
+      "GROUP_CMDS": {	
+        "description": "The Commands Usable by Everyone in Group Seperated by Spaces.",	
+        "required": false,	
+        "value":"search find m3u8"
+      },
+      "SEARCH_AUTH": {
+        "description": "Leave It",
+        "required": false
+      },
+      "LD_DOMW": {
+        "description": "Leave It",
+        "required": false
+      },
+      "APP_INTENT": {
+        "description": "Leave It",
+        "required": false
+      },
+      "PIC": {
+        "description": "The Picture You want to appear when start command is used.",
+        "required": false
+      },
+      "HEROKU_APP_NAME": {
+        "description": "The Name Of Heroku Lidrive App.",
+        "required": false
+      },
+      "HEROKU_API_KEY": {
+        "description": "The API Key of Heroku Account where Libdrive is set up.",
+        "required": false
+      }
+    },
+    "formation": {
+            "worker": {
+                "quantity": 1,
+                "size": "free"
+            }
+      }
+}
