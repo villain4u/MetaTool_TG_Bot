@@ -44,7 +44,7 @@ def searchmes(m):
             telegraph = Telegraph()
 
             telegraph_acc = telegraph.create_page(
-                    short_name="VTube",
+                    short_name="VTube Movies",
                     author_name='VTube Manager Bot',
                     author_url='https://t.me/VTube_Movies'
                 )
