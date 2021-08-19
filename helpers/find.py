@@ -43,19 +43,13 @@ def findmes(m):
         try:
             telegraph = Telegraph()
 
-            telegraph_res = telegraph.create_page(
-                    short_name="VTube",
-                    author_name='VTube Manager Bot',
-                    author_url='https://t.me/VTube_Movies'
-                )
+            telegraph_acc = telegraph.create_account(
+                short_name="Shrey Lib",
+                author_name="Shrey LibDrive Bot",
+                author_url="https://github.com/shrey2199/LD_Meta_bot"
+            )
 
             search_results = bot.send_message(m.chat.id, "`Searching in VTube ...`\n\n`Query` : *{}*".format(query), parse_mode=telegram.ParseMode.MARKDOWN)
-
-            url_conf = "https://{}/api/v1/config?secret={}".format(LD_DOMAIN, SECRET)
-
-            r1 = requests.get(url_conf)
-            res1 = r1.json()
-            search_acc_auth = res1["content"]["account_list"][0]["auth"]
 
             url_meta = "https://{}/api/v1/metadata?a={}&q={}".format(LD_DOMAIN, search_acc_auth, query)
 
@@ -87,11 +81,11 @@ def findmes(m):
 
                             
                             if str(type_) == "TV Shows":
-                                url_show = "intent:https://{}/view/{}#Intent;package={};S.title=@Tube_Movirs {};end".format(LD_DOMAIN, media["id"], APP_INTENT, media["title"])
-                                f_html = "<b> - View Link : </b> <a href={}>Play/Download In VTube App.</a> \nLogIn Required!<br>".format(url_show)
+                                url_show = "https://{}/view/{}".format(LD_DOMAIN, media["id"])
+                                f_html = "<b> - View Link : </b> <a href={}>Play/Download </a> - \n⚠️Donated Members Only⚠️<br>".format(url_show)
                             else:
-                                url_mov = "intent:https://{}/view/{}#Intent;package={};S.title=@Tube_Movirs {};end".format(LD_DOMAIN, media["id"], APP_INTENT, media["title"])
-                                f_html = "<b> - View Link : </b><a href={}>Play/Download In VTube App.</a> \nLogIn Required!!!<br>".format(url_mov)
+                                url_mov = "https://{}/view/{}".format(LD_DOMAIN, media["id"])
+                                f_html = "<b> - View Link : </b><a href={}>Play/Download </a> - \n⚠️Donated Members Only⚠️<br>".format(url_mov)
                             TG_html = '''<p>
                                             <img src=''' + str(backdrop) + '''>
                                             <b>Name : </b><code>''' + str(title) + '''</code><br>
