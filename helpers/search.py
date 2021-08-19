@@ -112,7 +112,7 @@ def searchmes(m):
 
                                         episode_str = '''<p>
                                                         <b> - - - - - - - - - - - - Episode : </b><code>''' + str(episode_num) + '''</code><br>
-                                                        <b> - - - - - - - - - - - - Play/Download In VTube App : </b><a href=intent:{}#Intent;package={};S.title=@Tube_Movies%20{};end>Play/Download</a> \n - - - - - - - ⚠️Donated Members Only⚠️<br>
+                                                        <b> - - - - - - - - - - - - Play/Download In VTube App : </b><a href={}>Play/Download</a> \n - - - - - - - ⚠️Donated Members Only⚠️<br>
                                                         </p>'''.format(dir_down_url, APP_INTENT, episode["name"])
 
                                         episode_html = episode_html + '{}'.format(episode_str)
@@ -139,7 +139,7 @@ def searchmes(m):
                             else:
                                 name = media["name"]
                                 dir_down = "https://{}/view/{}".format(LD_DOMAIN, media["id"], APP_INTENT, media["name"])
-                                f_season_html = "<b> - - - - - - - Play/Download In VTube App : </b><a href=intent:{}#Intent;package={};S.title=@Tube_Movies%20{};end>Play/Download</a> \n - - - - - - - ⚠️Donated Members Only⚠️<br>".format(dir_down, APP_INTENT, media["name"])
+                                f_season_html = "<b> - - - - - - - Play/Download In VTube App : </b><a href={}>Play/Download</a> \n - - - - - - - ⚠️Donated Members Only⚠️<br>".format(dir_down)
 
                             TG_html = '''<p>
                                             <img src=''' + str(backdrop) + '''>
