@@ -16,6 +16,9 @@ ADMIN_IDS = Config.ADMIN_IDS
 PIC = Config.PIC
 HEROKU_API_KEY = Config.HEROKU_API_KEY
 HEROKU_APP_NAME = Config.HEROKU_APP_NAME
+SEARCH_AUTH = Config.SEARCH_AUTH
+LD_DOMW = Config.LD_DOMW
+APP_INTENT = Config.APP_INTENT
 
 try:
     ADMIN_LIST = ADMIN_IDS 
@@ -40,11 +43,11 @@ def searchmes(m):
         try:
             telegraph = Telegraph()
 
-            telegraph_acc = telegraph.create_account(
-                short_name="Shrey Lib",
-                author_name="Shrey LibDrive Bot",
-                author_url="https://github.com/shrey2199/LD_Meta_bot"
-            )
+            telegraph_acc = telegraph.create_page(
+                    short_name="VTube",
+                    author_name='VTube Manager Bot',
+                    author_url='https://t.me/VTube_Movies'
+                )
 
             search_results = bot.send_message(m.chat.id, "`Searching Your LibDrive ...`\n\n`Query` : *{}*".format(query), parse_mode=telegram.ParseMode.MARKDOWN)
 
@@ -105,11 +108,11 @@ def searchmes(m):
                                         episode_name = episode["name"]
                                         episode_id = episode["id"]
                                         episode_num+=1
-                                        dir_down_url = "https://{}/api/v1/redirectdownload/{}?a={}&id={}".format(LD_DOMAIN, episode_name.replace(" ","%20"), search_acc_auth, episode_id)
+                                        dir_down_url = "https://{}/view/{}".format(LD_DOMAIN, episode["id"])
 
                                         episode_str = '''<p>
                                                         <b> - - - - - - - - - - - - Episode : </b><code>''' + str(episode_num) + '''</code><br>
-                                                        <b> - - - - - - - - - - - - Direct Download Link : </b><a href={}>Download From Here</a> !!<br>
+                                                        <b> - - - - - - - - - - - - Play/Download In VTube App : </b><a href={}>Play/Download</a> \n - - - - - - - ⚠️Donated Members Only⚠️<br>
                                                         </p>'''.format(dir_down_url)
 
                                         episode_html = episode_html + '{}'.format(episode_str)
@@ -122,8 +125,8 @@ def searchmes(m):
                                     telegraph_season = telegraph.create_page(
                                         title=season_name,
                                         html_content=season_html,
-                                        author_name='Shrey Libdrive Bot',
-                                        author_url='https://github.com/shrey2199/LD_Meta_bot'
+                                        author_name='VTube Manager Bot',
+                                        author_url='https://t.me/VTube_Movies'
                                     )
                                     season_url = telegraph_season['path']
 
@@ -135,8 +138,8 @@ def searchmes(m):
 
                             else:
                                 name = media["name"]
-                                dir_down = "intent:https://{}/view/{}#Intent;package={};S.title=@Tube_Movirs {};end".format(LD_DOMAIN, media["id"], APP_INTENT, media["name"])
-                                f_season_html = "<b> - - - - - - - Play/Download In VTube App : </b><a href={}></a> - - - - - - - ⚠️Donated Members Only⚠️ </b><br>".format(dir_down)
+                                dir_down = "intent:https://{}/view/{}#Intent;package={};S.title=@Tube_Movies%20{};end".format(LD_DOMAIN, media["id"], APP_INTENT, media["name"])
+                                f_season_html = "<b> - - - - - - - Play/Download In VTube App : </b><a href={}></a> \n - - - - - - - ⚠️Donated Members Only⚠️<br>".format(dir_down)
 
                             TG_html = '''<p>
                                             <img src=''' + str(backdrop) + '''>
@@ -155,10 +158,10 @@ def searchmes(m):
 
             if num_of_results != 0:
                 telegraph_res = telegraph.create_page(
-                    title="LibDrive Search Results",
+                    title="VTube Search Results",
                     html_content=html_string,
-                    author_name='Shrey Libdrive Bot',
-                    author_url='https://github.com/shrey2199/LD_Meta_bot'
+                    author_name='VTube Manager Bot',
+                    author_url='https://t.me/VTube_Movies'
                 )
 
                 telegraph_url = 'https://telegra.ph/{}'.format(telegraph_res['path'])
