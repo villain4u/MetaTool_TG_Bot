@@ -108,7 +108,7 @@ def searchmes(m):
                                         episode_name = episode["name"]
                                         episode_id = episode["id"]
                                         episode_num+=1
-                                        dir_down_url = "https://{}/view/{}".format(LD_DOMAIN, episode["id"])
+                                        dir_down_url = ""intent:https://{}/view/{}#Intent;package={};S.title=@Tube_Movies%20{};end"".format(LD_DOMAIN, episode["id"], APP_INTENT, media["name"])
 
                                         episode_str = '''<p>
                                                         <b> - - - - - - - - - - - - Episode : </b><code>''' + str(episode_num) + '''</code><br>
@@ -139,7 +139,7 @@ def searchmes(m):
                             else:
                                 name = media["name"]
                                 dir_down = "intent:https://{}/view/{}#Intent;package={};S.title=@Tube_Movies%20{};end".format(LD_DOMAIN, media["id"], APP_INTENT, media["name"])
-                                f_season_html = "<b> - - - - - - - Play/Download In VTube App : </b><a href={}>Play/Download</a> \n - - - - - - - ⚠️Donated Members Only⚠️<br>".format(dir_down)
+                                f_season_html = "<b> - - Play/Download In VTube App : </b><a href={}>Play/Download</a> \n ⚠️Donated Members Only⚠️<br>".format(dir_down)
 
                             TG_html = '''<p>
                                             <img src=''' + str(backdrop) + '''>
