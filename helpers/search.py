@@ -43,11 +43,11 @@ def searchmes(m):
         try:
             telegraph = Telegraph()
 
-            telegraph_acc = telegraph.create_page(
-                    short_name="VTube Movies",
-                    author_name='VTube Manager Bot',
-                    author_url='https://t.me/VTube_Movies'
-                )
+            telegraph_acc = telegraph.create_account(
+                short_name="Shrey Lib",
+                author_name="Shrey LibDrive Bot",
+                author_url="https://github.com/shrey2199/LD_Meta_bot"
+            )
 
             search_results = bot.send_message(m.chat.id, "`Searching Your LibDrive ...`\n\n`Query` : *{}*".format(query), parse_mode=telegram.ParseMode.MARKDOWN)
 
