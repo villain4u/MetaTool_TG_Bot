@@ -31,15 +31,15 @@ bot = telebot.TeleBot(BOT_TOKEN)
 logger = telebot.logger
 telebot.logger.setLevel(logging.INFO)
 
-def searchmes(m):
-    chat = grpcmd(m, "search")
+def findmes(m):
+    chat = grpcmd(m, "find")
     if chat == "" :
         bot.send_message(m.chat.id, text = """Pls Send the Command with Valid Queries !!
-        \n*To Search for Content :-*
-        Send /search `<search_query>`
+        \n*To Search for VTube Content :-*
+        Send /find `<search_query>`
         """, parse_mode=telegram.ParseMode.MARKDOWN)
     else:
-        query = grpcmd(m, "search")
+        query = grpcmd(m, "find")
         try:
             telegraph = Telegraph()
 
@@ -49,13 +49,7 @@ def searchmes(m):
                 author_url="https://github.com/shrey2199/LD_Meta_bot"
             )
 
-            search_results = bot.send_message(m.chat.id, "`Searching Your LibDrive ...`\n\n`Query` : *{}*".format(query), parse_mode=telegram.ParseMode.MARKDOWN)
-
-            url_conf = "https://{}/api/v1/config?secret={}".format(LD_DOMAIN, SECRET)
-
-            r1 = requests.get(url_conf)
-            res1 = r1.json()
-            search_acc_auth = res1["content"]["account_list"][0]["auth"]
+            search_results = bot.send_message(m.chat.id, "`Searching in VTube ...`\n\n`Query` : *{}*".format(query), parse_mode=telegram.ParseMode.MARKDOWN)
 
             url_meta = "https://{}/api/v1/metadata?a={}&q={}".format(LD_DOMAIN, search_acc_auth, query)
 
@@ -85,70 +79,21 @@ def searchmes(m):
                             else:
                                 overview = ""
 
+                            
                             if str(type_) == "TV Shows":
-                                show_id = media["id"]
-                                url_show = "https://{}/api/v1/metadata?a={}&id={}".format(LD_DOMAIN, search_acc_auth, show_id)
-                                r3 = requests.get(url_show)
-                                res3 = r3.json()
-
-                                f_season_html = ""
-
-                                for season in res3["content"]["children"]:
-                                    season_name = season["name"]
-                                    season_id = season["id"]
-
-                                    url_season = "https://{}/api/v1/metadata?a={}&id={}".format(LD_DOMAIN, search_acc_auth, season_id)
-                                    r4 = requests.get(url_season)
-                                    res4 = r4.json()
-
-                                    episode_num = 0
-                                    episode_html = ""
-
-                                    for episode in res4["content"]["children"]:
-                                        episode_name = episode["name"]
-                                        episode_id = episode["id"]
-                                        episode_num+=1
-                                        dir_down_url = "https://{}/view/{}?q={}".format(LD_DOMAIN, episode["id"], episode_num)
-
-                                        episode_str = '''<p>
-                                                        <b> - - - - - - - - - - - - Episode : </b><code>''' + str(episode_num) + '''</code><br>
-                                                        <b> - - - - - - - - - - - - Play/Download In VTube App : </b><a href={}>Play/Download</a> \n - - - - - - - ⚠️Donated Members Only⚠️<br>
-                                                        </p>'''.format(dir_down_url, APP_INTENT, episode["name"])
-
-                                        episode_html = episode_html + '{}'.format(episode_str)
-                                    
-                                    season_html = '''
-                                                    <b> - - - - - Season : </b><code>''' + season_name + '''</code><br><br>
-                                                    {}
-                                                    '''.format(episode_html)
-                                    
-                                    telegraph_season = telegraph.create_page(
-                                        title=season_name,
-                                        html_content=season_html,
-                                        author_name='VTube Manager Bot',
-                                        author_url='https://t.me/VTube_Movies'
-                                    )
-                                    season_url = telegraph_season['path']
-
-                                    season_html_url = '''
-                                                    <b> - - - - - Season : </b><a href="https://telegra.ph/''' + season_url + '''">''' + season_name + '''</a><br><br>
-                                                    '''
-
-                                    f_season_html = f_season_html + season_html_url
-
+                                url_show = "https://{}/view/{}".format(LD_DOMAIN, media["id"])
+                                f_html = "<b> - View Link : </b> <a href={}>Play/Download </a> - \n⚠️Donated Members Only⚠️<br>".format(url_show)
                             else:
-                                name = media["name"]
-                                dir_down = "https://{}/view/{}".format(LD_DOMAIN, media["id"], APP_INTENT, media["name"])
-                                f_season_html = "<b> - - - - - - - Play/Download In VTube App : </b><a href={}>Play/Download</a> \n - - - - - - - ⚠️Donated Members Only⚠️<br>".format(dir_down)
-
+                                url_mov = "https://{}/view/{}".format(LD_DOMAIN, media["id"])
+                                f_html = "<b> - View Link : </b><a href={}>Play/Download </a> - \n⚠️Donated Members Only⚠️<br>".format(url_mov)
                             TG_html = '''<p>
                                             <img src=''' + str(backdrop) + '''>
                                             <b>Name : </b><code>''' + str(title) + '''</code><br>
                                             <b> - Overview : </b><code>''' + str(overview) + '''</code><br>
                                             <b> - Release Date : </b><code>''' + str(releaseDate) + '''</code><br>
-                                            <b> - Type : </b><code>''' + str(type_) + '''</code><br><br>
+                                            <b> - Type : </b><code>''' + str(type_) + '''</code><br>
                                             {}<br>➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖<br>
-                                        </p>'''.format(f_season_html)
+                                        </p>'''.format(f_html)
 
                             html_string = html_string + TG_html
                     else:
@@ -169,8 +114,8 @@ def searchmes(m):
                 keyboard.row(
                     telebot.types.InlineKeyboardButton("🔍Search Results", url=telegraph_url)
                 )
-                bot.edit_message_text("`Query` : *{}*\n\n`Found `*{}*` Matching Search Results !!`".format(query, str(num_of_results)), m.chat.id, message_id=search_results.message_id, reply_markup=keyboard, parse_mode=telegram.ParseMode.MARKDOWN)
+                bot.edit_message_text("`Query` : *{}*\n`Found `*{}*` Matching Search Results !!`".format(query, str(num_of_results)), m.chat.id, message_id=search_results.message_id, reply_markup=keyboard, parse_mode=telegram.ParseMode.MARKDOWN)
             else:
                 bot.edit_message_text("*No Matching Search Results !!*", m.chat.id, message_id=search_results.message_id, parse_mode=telegram.ParseMode.MARKDOWN)
         except:
-            bot.edit_message_text("`LibDrive Server Not Accessible !!`", m.chat.id, message_id=search_results.message_id, parse_mode=telegram.ParseMode.MARKDOWN)
+            bot.edit_message_text("`VTube Manager Not Accessible To The Server!!`", m.chat.id, message_id=search_results.message_id, parse_mode=telegram.ParseMode.MARKDOWN)
