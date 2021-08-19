@@ -108,7 +108,7 @@ def searchmes(m):
                                         episode_name = episode["name"]
                                         episode_id = episode["id"]
                                         episode_num+=1
-                                        dir_down_url = "https://{}/view/{}".format(LD_DOMAIN, episode["id"])
+                                        dir_down_url = "https://{}/view/{}?q={}".format(LD_DOMAIN, episode["id"], episode_num)
 
                                         episode_str = '''<p>
                                                         <b> - - - - - - - - - - - - Episode : </b><code>''' + str(episode_num) + '''</code><br>
