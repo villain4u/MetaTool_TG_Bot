@@ -43,16 +43,16 @@ def getm3u8w(m):
             
             search_results = bot.send_message(m.chat.id, "`Searching Your LibDrive ...`\n\n`Query` : *{}*".format(query), parse_mode=telegram.ParseMode.MARKDOWN)
 
-            url_meta = "https://{}/api/v1/metadata?a={}&q={}".format(LD_DOMW, SEARCH_AUTH, query)
+            url_metab = "https://{}/api/v1/metadata?a={}&q={}".format(LD_DOMW, SEARCH_AUTH, query)
 
-            r2 = requests.get(url_meta)
-            res2 = r2.json()
+            r1 = requests.get(url_metab)
+            res1 = r1.json()
 
             num_of_results = 0
             shows_list = []
 
-            if res2["code"] == 200 and res2["success"] == True:
-                for cat in res2["content"]:
+            if res1["code"] == 200 and res1["success"] == True:
+                for cat in res1["content"]:
                     if len(cat["children"]) != 0:
                         for media in cat["children"]:
                             num_of_results += 1
